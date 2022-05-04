@@ -1,0 +1,84 @@
+import javax.swing.*;
+import java.util.Scanner;
+
+public class NTSS {
+
+    static Account a = new Account();
+    static Event e = new Event();
+    static Payment p = new Payment();
+    static Reviewer r = new Reviewer();
+
+    public static void main(String[] args) {
+
+        String[] selection = {"Purchase a Ticket", "Reserve a Booth", "Review Proposal"};
+        String initial = "";
+        String type = (String) JOptionPane.showInputDialog(null, "What would you like to do", "NTSS", JOptionPane.QUESTION_MESSAGE, null, selection, initial);
+        System.out.println(type);
+
+        a.setAccountType(type);
+        String name = JOptionPane.showInputDialog(null, "CREATE AN ACCOUNT\nEnter Full Name");
+        a.setName(name);
+
+        String usrName = JOptionPane.showInputDialog(null, "Create a Username ");
+        a.setUsername(usrName);
+
+        String pwd = JOptionPane.showInputDialog(null, "Create a Password ");
+        a.setPassword(pwd);
+
+        JOptionPane.showMessageDialog(null, "Account Successfully Created!" +
+                "\nName: " + a.getName() +
+                "\nAccount Type: " + a.getAccountType());
+
+        if(a.getAccountType().equals("Vendor")) {
+            String[] themeType = {"Product", "Service"};
+            String[] categories = {"Automotive", "Apparel", "Electronics", "Household", "Outdoors", "Office"};
+            String themeSelection = (String) JOptionPane.showInputDialog(null, "Select Show Theme", "NTSS", JOptionPane.QUESTION_MESSAGE, null, themeType, initial);
+            String themeCategory = (String) JOptionPane.showInputDialog(null, "Select Category", "NTSS", JOptionPane.QUESTION_MESSAGE, null, categories, initial);
+            e.setTheme(themeCategory);
+
+            String slogan = JOptionPane.showInputDialog(null, "Enter a Slogan");
+            e.setSlogan(slogan);
+
+            int eventDuration = Integer.parseInt(JOptionPane.showInputDialog(null, "How long will you host your event (in minutes)?"));
+            e.setDuration(eventDuration);
+
+            String[] boothSize = {"Small - 10x14", "Midsize - 14x20", "Large - 18x20"};
+            String boothSizeSelection = (String) JOptionPane.showInputDialog(null, "Select a Booth Size", "NTSS", JOptionPane.QUESTION_MESSAGE, null, boothSize, initial);
+            e.setBoothSize(boothSizeSelection);
+
+            JOptionPane.showMessageDialog(null, "EVENT SUCCESSFULLY CREATED" +
+                    "\nEvent Theme: " + e.getTheme() +
+                    "\nEvent Slogan: " + e.getSlogan() +
+                    "\nEvent Duration: " + e.getDuration() + " minutes" +
+                    "\nBooth Reserved: " + e.getBoothSize() +
+                    "\nBooths remaining: " + e.getBoothAvailability());
+        }
+        else if(a.getAccountType().equals("Attendee")) {
+            String[] paymentMethods = {"Credit/Debit", "Bank Account"};
+            String selectedPaymentMethod = (String) JOptionPane.showInputDialog(null, "Tickets cost $25\nPlease select a pay", "NTSS", JOptionPane.QUESTION_MESSAGE, null, paymentMethods, initial);
+            p.savePaymentType(selectedPaymentMethod);
+            if(selectedPaymentMethod.equals("Credit/Debit")){
+                String card = JOptionPane.showInputDialog(null, "Enter Card Number");
+                int expiry = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter Card Expiry (MMYY)"));
+                p.savePayment(card, expiry);
+            }
+            else{
+                int bankAccount = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter Bank Account Number"));
+                p.saveBankNum(bankAccount);
+            }
+            JOptionPane.showMessageDialog(null, "Ticket Successfully Purchased Using " + p.getPaymentType());
+        }
+        else if(a.getAccountType().equals("Reviewer")){
+            String[] decision = {"ACCEPTED", "REJECTED"};
+            String selectedDecision = (String) JOptionPane.showInputDialog(null, "Speaker Attendance to Event", "NTSS", JOptionPane.QUESTION_MESSAGE, null, decision, initial);
+            r.setStatus(selectedDecision);
+            JOptionPane.showMessageDialog(null, "Reviewer " +
+                    a.getName() +
+                    " " +
+                    r.getStatus() +
+                    " the request for a speaker to attend the show");
+        }
+
+        System.out.println(a.getAccountType());
+    }
+}
