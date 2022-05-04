@@ -1,0 +1,12 @@
+public class Reviewer extends Account{
+
+    private String status;
+
+    public void setStatus(String a){
+        status = a;
+    }
+
+    public String getStatus(){
+        return status;
+    }
+}
