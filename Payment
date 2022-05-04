@@ -1,0 +1,32 @@
+public class Payment {
+
+    private String paymentType;
+    private String cardNum;
+    private int expiry;
+    private int bankAccntNum;
+
+
+    public void savePaymentType(String n){
+        paymentType = n;
+    }
+    public void savePayment(String num, int exp){
+        cardNum = num;
+        expiry = exp;
+    }
+
+    public void saveBankNum(int num){
+        bankAccntNum = num;
+    }
+
+    public String getPaymentType(){
+        return paymentType;
+    }
+
+    public String getCardNum(){
+        return cardNum;
+    }
+
+    public int getCardExpiry(){
+        return expiry;
+    }
+}
