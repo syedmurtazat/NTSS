@@ -1,0 +1,52 @@
+import javax.xml.namespace.QName;
+
+public class Account {
+
+    private String name;
+    private String accountType;
+    private String username;
+    private String password;
+
+    public void setName(String n){
+        name = n;
+    }
+    public void setAccountType(String t){
+        if(t.equals("Reserve a Booth"))
+            accountType = "Vendor";
+        else if(t.equals("Purchase a Ticket"))
+            accountType = "Attendee";
+        else if(t.equals("Review Proposal"))
+            accountType = "Reviewer";
+    }
+
+    public void setUsername(String u){
+        username = u;
+    }
+
+    public void setPassword(String p){
+        password = p;
+    }
+
+    public boolean verifyPassword(String p){
+        if(password == p)
+            return true;
+        else
+            return false;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPassword(){
+        return password;
+    }
+
+    public String getAccountType(){
+        return accountType;
+    }
+}
