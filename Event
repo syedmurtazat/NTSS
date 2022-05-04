@@ -1,0 +1,54 @@
+public class Event {
+
+    private static int BOOTHSAVAILABLE = 30;
+    private String theme;
+    private String slogan;
+    private int duration;
+    private String boothSize;
+
+    public void setTheme(String t){
+        theme = t;
+    }
+
+    public void setSlogan(String s){
+        slogan = s;
+    }
+
+    public void setDuration(int d){
+        duration = d;
+    }
+
+    public String getTheme(){
+        return theme;
+    }
+
+    public String getSlogan(){
+        return slogan;
+    }
+
+    public void setBoothSize(String s){
+        if(s.equals("Small - 10x14")) {
+            boothSize = "Small";
+            BOOTHSAVAILABLE--;
+        }
+        else if(s.equals("Midsize - 14x20")) {
+            boothSize = "Midsize";
+            BOOTHSAVAILABLE--;
+        }
+        else if(s.equals("Large - 18x20")) {
+            boothSize = "Large";
+            BOOTHSAVAILABLE--;
+        }
+    }
+
+    public int getBoothAvailability(){
+        return BOOTHSAVAILABLE;
+    }
+
+    public String getBoothSize(){
+        return boothSize;
+    }
+    public int getDuration(){
+        return duration;
+    }
+}
